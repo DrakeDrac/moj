@@ -1780,7 +1780,7 @@ function(err, data) {
 	for (let i = 0; i < 10; i++) {
 	let img="https://image.tmdb.org/t/p/w500/"+data.results[i].backdrop_path;
 	function mojjj(){
-	let urll="./video.html?info="+data.results[i].id;
+	let urll="./video.html?info="+data.results[i].id+"&s=1&e=1";
 	document.getElementById('MojAfs').innerHTML += `<div class="ipc-slate-card ipc-slate-card--baseAlt ipc-slate-card--dynamic-width sc-d4fc4efa-0 jFbkTm imdb-editorial-single ipc-sub-grid-item ipc-sub-grid-item--span-4" role="group">
                                     <div class="ipc-slate ipc-slate--baseAlt ipc-slate--dynamic-width ipc-slate-card__slate ipc-sub-grid-item ipc-sub-grid-item--span-4" role="group">
                                        <div class="ipc-media ipc-media--slate-16x9 ipc-image-media-ratio--slate-16x9 ipc-media--baseAlt ipc-media--slate-s ipc-slate__slate-image ipc-media__img" style="width:100%"><img alt="Image caption not available" class="ipc-image" loading="lazy" src=`+img+ ` sizes="100vw, (min-width: 480px) 68vw, (min-width: 600px) 52vw, (min-width: 1024px) 32vw, (min-width: 1280px) 32vw" width="380"></div>

@@ -1769,7 +1769,7 @@ function(err, data) {
   for (let i =0; i< data.number_of_seasons;i++ ){
   document.getElementById('container').innerHTML += '<button class="btn fourth" onclick="Sea('+(i+1)+')">'+(i+1)+'</button>';
   }
-  for (let i =0; i< data.seasons[s].episode_count;i++ ){
+  for (let i =0; i< data.seasons[s-1].episode_count;i++ ){
   document.getElementById('containerr').innerHTML += '<button class="btn fifth" onclick="Epi('+(i+1)+')">'+(i+1)+'</button>';
   }
   imdbid=data.external_ids.imdb_id;
@@ -1791,6 +1791,7 @@ OpenVid(e);
 }
 function OpenVid(e){
         window.webtor = window.webtor || [];
+		document.getElementById('Maka').remove();
         window.webtor.push({
             id: 'player',
             magnet: hashh,      
@@ -1803,7 +1804,8 @@ function OpenVid(e){
             <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
 			
          </main>
-		 <h8> Seasons:</h8>
+		 <h8 id="Maka">  Loading.... </h8><div></div>
+		 <h8>Seasons:</h8>
 		 			<div id="container">
 					
          
@@ -1919,12 +1921,13 @@ function(err, data) {
 	for (let i = 0; i < 10; i++) {
 	let img="https://image.tmdb.org/t/p/w500/"+data.results[i].backdrop_path;
 	function mojjj(){
-	let urll="./video.html?info="+data.results[i].id;
+	let urll="./video.html?info="+data.results[i].id+"&s=1&e=1";
 	document.getElementById('MojAfs').innerHTML += `<div class="ipc-slate-card ipc-slate-card--baseAlt ipc-slate-card--dynamic-width sc-d4fc4efa-0 jFbkTm imdb-editorial-single ipc-sub-grid-item ipc-sub-grid-item--span-4" role="group">
                                     <div class="ipc-slate ipc-slate--baseAlt ipc-slate--dynamic-width ipc-slate-card__slate ipc-sub-grid-item ipc-sub-grid-item--span-4" role="group">
                                        <div class="ipc-media ipc-media--slate-16x9 ipc-image-media-ratio--slate-16x9 ipc-media--baseAlt ipc-media--slate-s ipc-slate__slate-image ipc-media__img" style="width:100%"><img alt="Image caption not available" class="ipc-image" loading="lazy" src=`+img+ ` sizes="100vw, (min-width: 480px) 68vw, (min-width: 600px) 52vw, (min-width: 1024px) 32vw, (min-width: 1280px) 32vw" width="380"></div>
                                        <a class="ipc-lockup-overlay ipc-focusable" href=`+urll+` tabindex="0" aria-label="2:14">
                                           <div class="ipc-lockup-overlay__screen"></div>
+    
                                           <div class="ipc-lockup-overlay__gradient ipc-lockup-overlay__gradient--linear"></div>
                                           <div class="ipc-lockup-overlay__content">
                                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="ipc-icon ipc-icon--play-circle-outline ipc-lockup-overlay__icon" id="iconContext-play-circle-outline" viewBox="0 0 24 24" fill="currentColor" role="presentation">
