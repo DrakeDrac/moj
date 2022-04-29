@@ -1729,15 +1729,18 @@
 	var s=0;
 	s= url.searchParams.get("s");
 	var e= url.searchParams.get("e");
-	var q= 0;
+	var q= 1;
 	if(url.searchParams.get("q")!=null)
 	  q=url.searchParams.get("q");
 	var source = document.getElementById('source');
 	function Epi(e){
+	var url_string = window.location.href;
+	var url = new URL(url_string); 
+	s= url.searchParams.get("s");
 	window.open("./video.html?info="+c+"&s="+s+"&e="+e, "_self");
 	}
 	function Sea(s){
-	window.open("./video.html?info="+c+"&s="+s+"&e="+e, "_self");
+	window.open("./video.html?info="+c+"&s="+s+"&e="+1, "_self");
 	}
 	if(s==null){
  getJSON("https://api.themoviedb.org/3/movie/"+c+"?api_key=2c4c016f73d1765124750b6b23a24b5b",
@@ -1784,10 +1787,13 @@ function(errr, dataa) {
   if (err !== null) {
     alert('Something went wrong: ' + err);
   } else {
+for(let i=0;i<dataa.streams.length;i++){
+  url="./video.html?info="+c+"&q=";
+  document.getElementById('qs').innerHTML += '<a href='+url+i+'>'+dataa.streams[i].title+'</a>';
+  }
 //source.setAttribute('src', dataa.streams[1].infoHash);
-hashh=dataa.streams[1].infoHash;
-OpenVid(e);
-//torrentio.strem.fun/lite/stream/movie/tt0468569.json
+hashh=dataa.streams[q].infoHash;
+OpenVid(0);
  }
 });
  }
