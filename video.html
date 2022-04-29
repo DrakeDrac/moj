@@ -1726,8 +1726,12 @@
 						var url_string = window.location.href;
 	var url = new URL(url_string); 
 	var c = url.searchParams.get("info");
-	var s= url.searchParams.get("s");
+	var s=0;
+	s= url.searchParams.get("s");
 	var e= url.searchParams.get("e");
+	var q= 0;
+	if(url.searchParams.get("q")!=null)
+	  q=url.searchParams.get("q");
 	var source = document.getElementById('source');
 	function Epi(e){
 	window.open("./video.html?info="+c+"&s="+s+"&e="+e, "_self");
@@ -1747,18 +1751,18 @@ function(errr, dataa) {
   if (err !== null) {
     alert('Something went wrong: ' + err);
   } else {
+  for(let i=0;i<dataa.streams.length;i++){
+  url="./video.html?info="+c+"&q=";
+  document.getElementById('qs').innerHTML += '<a href='+url+i+'>'+dataa.streams[i].title+'</a>';
+  }
 //source.setAttribute('src', dataa.streams[1].infoHash);
-hashh=dataa.streams[1].infoHash;
+hashh=dataa.streams[q].infoHash;
 OpenVid(0);
 //torrentio.strem.fun/lite/stream/movie/tt0468569.json
  }
 });
  }
 });
-var els = document.querySelectorAll('h8');
-for (var i = 0; i < els.length; i++) {
-    els[i].remove();
-}
 }
 else{
 getJSON("https://api.themoviedb.org/3/tv/"+c+"?api_key=2c4c016f73d1765124750b6b23a24b5b&language=en-US&append_to_response=external_ids",
@@ -1789,9 +1793,20 @@ OpenVid(e);
  }
 });
 }
+function Del(){
+		if(s=0){
+		var els = document.querySelectorAll('h8');
+for (var i = 0; i < els.length; i++) {
+    els[i].remove();
+	alert(els[i])
+}
+}}
+setTimeout(Del, 2000);
 function OpenVid(e){
+setTimeout(Del, 2000);
         window.webtor = window.webtor || [];
 		document.getElementById('Maka').remove();
+
         window.webtor.push({
             id: 'player',
             magnet: hashh,      
@@ -1804,7 +1819,8 @@ function OpenVid(e){
             <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
 			
          </main>
-		 <h8 id="Maka">  Loading.... </h8><div></div>
+		 <h9>Qualities available:</h9>
+		 <h8 id="Maka">  Loading.... </h8><div id="qs"></div>
 		 <h8>Seasons:</h8>
 		 			<div id="container">
 					
@@ -1814,6 +1830,7 @@ function OpenVid(e){
 		 	<div id="containerr">
 					
 		 </div>
+		 <div id="qs"></div>
 <section class="ipc-page-section ipc-page-section--baseAlt">
                            <hgroup class="ipc-title ipc-title--subsection-title ipc-title--baseAlt ipc-title--on-textPrimary">
                               <h3 class="ipc-title__text">Movies</h3>
