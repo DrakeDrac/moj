@@ -1659,7 +1659,7 @@ function(errr, dataa) {
     alert('Something went wrong: ' + err);
   } else {
 for(let i=0;i<dataa.streams.length;i++){
-  url="./video.html?info="+c+"&q=";
+  url="./video.html?info="+c+"&s="+s+"&e="+e+"&q=";
   document.getElementById('qs').innerHTML += '<a href='+url+i+'>'+dataa.streams[i].title+'</a>';
   }
 //source.setAttribute('src', dataa.streams[1].infoHash);
