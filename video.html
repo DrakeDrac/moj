@@ -1771,11 +1771,26 @@ setTimeout(Del, 2000);
 }	 
 						</script>
             <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
-			
+			    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+
+      var detector = setInterval(function() {
+
+        var elem = document.activeElement;
+
+        if (elem && elem.tagName == 'IFRAME') 
+        {
+          return false;
+          clearInterval(detector);
+        }
+
+      }, 100);
+
+    </script>
          </main>
 		           <div id="controls">
         <span class="control">
-		       <button class="btn fourth" id="play">Play (avoiding ads)</button>
+		       <button class="btn fourth" id="play">Play</button>
 		</span>
 				   </div>
 		 <h9>Qualities available:</h9>
