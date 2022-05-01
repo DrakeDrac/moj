@@ -1682,15 +1682,39 @@ setTimeout(Del, 2000);
 function OpenVid(e){
 setTimeout(Del, 2000);
         window.webtor = window.webtor || [];
-		document.getElementById('Maka').remove();
-
-        window.webtor.push({
+		document.getElementById('Maka').remove();				
+         window.webtor.push({
             id: 'player',
+            // baseUrl: 'https://webtor.io',
+            // baseUrl: 'http://192.168.0.100:4000',
             magnet: hashh,      
-            imdbId: imdbid,				
-            width: "100%",			
-        },
-	 on: function(e) {
+            imdbId: imdbid,
+            subtitles: [
+                // {
+                //     srclang: 'en',
+                //     label: 'SHQIP',
+                //     src: 'https://dl.dropboxusercontent.com/s/afsiiiw705h3vkk/Ava.2020.HDRip.srt?dl=0',
+                //     default: true,
+                // },
+            ],
+            width: '100%',
+            height: '100%',
+            features: {
+                autoSubtitles: true,
+                continue:      false,
+                // title:       false,
+                // p2pProgress: false,
+                // subtitles:   false,
+                // settings:      false,
+                fullscreen:  true,
+                // playpause:   false,
+                // currentTime: false,
+                // timeline:    false,
+                // duration:    false,
+                // volume:      false,
+                // chromecast:  false,
+            },
+            on: function(e) {
                 if (e.name == window.webtor.TORRENT_FETCHED) {
                     console.log('Torrent fetched!', e.data.files);
 
@@ -1744,7 +1768,7 @@ setTimeout(Del, 2000);
                 }
             },
         });
-					}	 
+}	 
 						</script>
             <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
 			
