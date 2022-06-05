@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>StockMarket</title>
+  <link rel="stylesheet" href="./style2.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1><span class="blue">&lt;</span>Nifty<span class="blue">&gt;</span> <span class="yellow">50</pan></h1>
+<h2>Spot Price as of </h2>
+<h3 id="spotPrice"></h3>
+<table class="container" id="currentMarketPCR">
+	<thead>
+		<tr>
+			<th><h1>Time</h1></th>
+			<th><h1>Strike Price</h1></th>
+			<th><h1>PCR</h1></th>
+			<th><h1>Call OI</h1></th>
+			<th><h1>Put OI</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$.getJSON('https://rest-api-python.drakedsshitpost.repl.co/', function(data) {
+		document.getElementById('spotPrice').innerHTML=data.value;
+	var table = document.getElementById("currentMarketPCR").getElementsByTagName('tbody')[0];
+
+	//console.log(Object.keys(data[1][Object.keys(data[1])[0]]).length);
+	var StrikePrice=0.0;
+	for (let index = 0; index < Object.keys(data[1][Object.keys(data[1])[0]]).length; index++) {
+		if(parseFloat(Object.keys(data[1][Object.keys(data[1])[0]])[index]) > data.value){
+			StrikePrice=Object.keys(data[1][Object.keys(data[1])[0]])[index-1];
+			break;
+		}
+	}
+	var options = {
+  chart: {
+    height: 280,
+    type: "area"
+  },
+  dataLabels: {
+    enabled: true,
+		background: {
+			enabled: true,
+			borderRadius:2,
+		}
+  },
+  series: [
+    {
+      name: "PCR",
+      data: []
+    }
+  ],
+  fill: {
+    type: "gradient",
+    gradient: {
+      shadeIntensity: 1,
+      opacityFrom: 0.7,
+      opacityTo: 0.9,
+      stops: [0, 90, 100]
+    }
+  },
+  xaxis: {
+	colors: ['#F44336', '#E91E63', '#9C27B0'],
+    categories: [
+	  "09:30",
+      "09:45",
+      "10:00",
+      "10:15",
+      "10:30",
+      "10:45",
+      "11:00",
+      "11:15",
+      "11:30",
+      "11:45",
+      "12:00"
+    ]
+  }
+};
+
+	//for (var Dates in data) {
+	//	if(Dates != data.value){
+			for (var Time in data[1]) {
+				var StrikeObj=data[1][Time][StrikePrice.toString()];
+				var row = table.insertRow();
+				var time = row.insertCell(0);
+				var strikeprice = row.insertCell(1);
+				var PCR = row.insertCell(2);
+				var cOI = row.insertCell(3);
+				var pOI = row.insertCell(4);
+				time.innerHTML=Time;
+				strikeprice.innerHTML=StrikePrice;
+
+				var Pcr=(StrikeObj.puts_oi / StrikeObj.calls_oi).toFixed(3);
+
+				PCR.innerHTML=Pcr;
+				cOI.innerHTML=StrikeObj.calls_oi;
+				pOI.innerHTML=StrikeObj.puts_oi;
+				options.series[0].data.push(Pcr)
+				console.log(options.series[0].name);
+			}
+	//	}
+	//}
+	var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+chart.render();
+});
+</script>
+<div id="chart">
+</div>
+</body>
+</html>
