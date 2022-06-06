@@ -31,8 +31,8 @@
 		document.getElementById('spotPrice').innerHTML=data.value;
 	var table = document.getElementById("currentMarketPCR").getElementsByTagName('tbody')[0];
 
-	var datas=(data.data[Object.keys(data.data)[0]])[Object.keys(data.data[Object.keys(data.data)[0]])];
-	console.log(parseFloat(Object.keys(datas)[0]));
+	var datas=(data.data[Object.keys(data.data)[0]])[Object.keys(data.data[Object.keys(data.data)[0]])[0]];
+	console.log(Object.keys(data.data[Object.keys(data.data)[0]]));
 	var StrikePrice=16550.0;
 	for (let index = 0; index < Object.keys(datas).length; index++) {
 		if(parseFloat(Object.keys(datas)[index]) > data.value){
@@ -89,6 +89,7 @@
 	//for (var Dates in data) {
 	//	if(Dates != data.value){
 			for (var Time in data.data[Object.keys(data.data)[0]]) {
+			    
 				var row = table.insertRow();
 				var time = row.insertCell(0);
 				var strikeprice = row.insertCell(1);
@@ -98,7 +99,7 @@
 				time.innerHTML=Time;
 				strikeprice.innerHTML=StrikePrice;
 
-				var StrikeObj=datas[StrikePrice.toString()];
+				var StrikeObj=data.data[Object.keys(data.data)[0]][Time][StrikePrice.toString()];
 				var Pcr=(StrikeObj.puts_oi / StrikeObj.calls_oi).toFixed(3);
 
 				PCR.innerHTML=Pcr;
