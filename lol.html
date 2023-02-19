@@ -22,7 +22,8 @@ xhr.setRequestHeader("Access-Control-Allow-Headers","If-Modified-Since,Range");
 xhr.setRequestHeader("Access-Control-Allow-Credentials","true");
 }
 };
-var hls = new Hls(config);
+          //var hls = new Hls(config);
+          var hls = new Hls();
         hls.loadSource('https://b-g-eu-4.feetcdn.com:2223/v3-hls-playback/093997b0a3046470bdf294d6575e93edce3d94d2464fe331996d922afcbf78cfaa396492cd2dfd0741f728c712d6dfcf8a50128be8d484fcb6dfb59834b358ae4f251cae6b241f8b76c99abf75ac7cd32249c8b018c517eecc4e1f233d56d77a6a80b68d07f865570d25f2be48eb92f5b6db5c16b8aaafcf77ba581689b2cb8db62de67bc38082362c43d761153175e77f95592ea9308bab6ae188599758e429bb79e7031291db65f653f49e3fe38a30/playlist.m3u8');
         hls.attachMedia(video);
         hls.on(Hls.Events.MEDIA_ATTACHED, function () {
